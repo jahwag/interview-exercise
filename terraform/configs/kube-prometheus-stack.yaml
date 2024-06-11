@@ -1,0 +1,43 @@
+grafana:
+  enabled: true
+  defaultDashboardsEnabled: false
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki-gateway
+      access: proxy
+      jsonData:
+        maxLines: 1000
+  sidecar:
+    datasources:
+      enabled: true
+      label: grafana_datasource
+
+prometheusOperator:
+  createCustomResource: true
+
+prometheus:
+  ingress:
+    enabled: true
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector:
+      matchLabels:
+        release: kube-prometheus-stack
+  additionalServiceMonitors:
+    - name: interview-exercise-servicemonitor
+      namespace: monitoring
+      labels:
+        release: kube-prometheus-stack
+        app.selector: interview-exercise
+      endpoints:
+        - port: prometheus
+          scheme: http
+          interval: 30s
+          path: /actuator/prometheus
+      selector:
+        matchLabels:
+          app.selector: interview-exercise
+      namespaceSelector:
+        matchNames:
+          - paf

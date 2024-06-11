@@ -31,3 +31,10 @@ build/
 ### VS Code ###
 .vscode/
 .bak
+
+# Chart dependencies
+**/charts/*.tgz
+
+# Terraform
+.terraform*
+terraform.tfstate*

@@ -1,0 +1,17 @@
+serviceMonitor:
+  enabled: true
+
+config:
+  clients:
+    - url: http://loki-gateway/loki/api/v1/push
+  enableTracing: true
+
+extraVolumes:
+  - name: node-logs
+    hostPath:
+      path: /var/log
+
+extraVolumeMounts:
+  - name: node-logs
+    mountPath: /var/log/host
+    readOnly: true

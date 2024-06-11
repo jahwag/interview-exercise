@@ -53,11 +53,6 @@
       <artifactId>micrometer-registry-prometheus</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.github.loki4j</groupId>
-      <artifactId>loki-logback-appender</artifactId>
-      <version>1.5.1</version>
-    </dependency>
-    <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
@@ -102,17 +97,41 @@
       </plugin>
 
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>get-minikube-ip</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>kubectl</executable>
+              <arguments>
+                <argument>get</argument>
+                <argument>nodes</argument>
+                <argument>-o=jsonpath={.items[0].status.addresses[?(@.type=="InternalIP")].address}</argument>
+              </arguments>
+              <successCodes>
+                <successCode>0</successCode>
+              </successCodes>
+              <outputProperty>minikube.registry.ip</outputProperty>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>
         <version>3.4.3</version>
         <configuration>
           <to>
-            <image>ghcr.io/jahwag/interview-exercise:latest</image>
-            <auth>
-              <username>${env.GITHUB_USERNAME}</username>
-              <password>${env.GITHUB_PAT}</password>
-            </auth>
+            <url>http://${image.registry.ip}:5000/interview-exercise</url>
           </to>
+          <allowInsecureRegistries>true</allowInsecureRegistries>
         </configuration>
       </plugin>
 
