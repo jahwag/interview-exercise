@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="ticket-3" author="jahwag">
+        <createTable tableName="tournament">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="reward_prize" type="DECIMAL(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="player">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="tournament_player">
+            <column name="tournament_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="player_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="tournament_player"
+                                 baseColumnNames="tournament_id"
+                                 constraintName="fk_tournament"
+                                 referencedTableName="tournament"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="tournament_player"
+                                 baseColumnNames="player_id"
+                                 constraintName="fk_player"
+                                 referencedTableName="player"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+</databaseChangeLog>

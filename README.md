@@ -23,10 +23,16 @@ Ensure you have the following tools installed on your system:
 
 ## Usage
 ### Quick Start
-To quickly deploy the application, run the following command:
+1. To quickly deploy the application, run the following command:
  ```sh
  ./scripts/minikube.sh
  ```
+
+2. Application is served here:
+
+http://localhost:8080/swagger-ui.html
+
+You may authenticate with user:user or admin:admin.
 
 ### Step-by-Step Deployment
 If you prefer to deploy the application step-by-step, follow these instructions:

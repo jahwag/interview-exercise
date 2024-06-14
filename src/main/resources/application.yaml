@@ -10,7 +10,10 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
+    open-in-view: false
+  liquibase:
+    change-log: classpath:db/changelog.xml
 
 management:
   prometheus:
@@ -24,3 +27,8 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+#springdoc:
+#  swagger-ui:
+#    with-credentials: true
+
+
