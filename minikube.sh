@@ -41,7 +41,19 @@ check_os() {
 }
 
 is_minikube_running() {
-    kubectl config current-context | grep -q "minikube"
+    current_context=$(kubectl config current-context 2>/dev/null)
+    if [ -z "$current_context" ]; then
+        return 1
+    elif echo "$current_context" | grep -q "minikube"; then
+        minikube_status=$(minikube status --format='{{.Host}}' 2>/dev/null)
+        if [ "$minikube_status" = "Running" ]; then
+            return 0
+        else
+            return 1
+        fi
+    else
+        return 1
+    fi
 }
 
 OS=$(check_os)
