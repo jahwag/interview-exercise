@@ -27,8 +27,5 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-#springdoc:
-#  swagger-ui:
-#    with-credentials: true
 
 

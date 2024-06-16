@@ -44,14 +44,43 @@ resource "kubernetes_deployment" "application" {
               path = "/actuator/prometheus"
               port = 8080
             }
-            initial_delay_seconds = 3
+            initial_delay_seconds = 60
             period_seconds        = 3
+          }
+
+          // Add environment variables to use k8s profile and secret values
+          env {
+            name  = "SPRING_PROFILES_ACTIVE"
+            value = "k8s"
+          }
+          env {
+            name = "SPRING_DATASOURCE_USERNAME"
+            value_from {
+              secret_key_ref {
+                name = kubernetes_secret.postgresql.metadata[0].name
+                key  = "postgres-user"
+              }
+            }
+          }
+          env {
+            name = "SPRING_DATASOURCE_PASSWORD"
+            value_from {
+              secret_key_ref {
+                name = kubernetes_secret.postgresql.metadata[0].name
+                key  = "postgres-password"
+              }
+            }
           }
         }
       }
     }
   }
+
+  depends_on = [
+    helm_release.postgresql
+  ]
 }
+
 
 // Define the Kubernetes service for your application
 resource "kubernetes_service" "application" {

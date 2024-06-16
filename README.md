@@ -11,10 +11,9 @@ This repository showcases a solution to upgrade the original application, bringi
 - **Modern Technologies**: Built with Spring Boot 3 and Java 21.
 
 ## Areas not included
-- Integration with a production-grade DBMS such as PostgreSQL.
 - Advanced authentication mechanisms like Single Sign-On (SSO) or OAuth2.
 - New backoffice UI
-- 
+
 ## Prerequisites
 Ensure you have the following tools installed on your system:
 
@@ -39,25 +38,4 @@ Ensure you have the following tools installed on your system:
 
 http://localhost:8080/swagger-ui.html
 
-You may authenticate with user:user or admin:admin.
-
-### Step-by-Step Deployment
-If you prefer to deploy the application step-by-step, follow these instructions:
-
-1. **Set up Minikube**:
-    ```sh
-    ./scripts/setup.sh
-    ```
-
-2. **Deploy the Application**:
-    ```sh
-    ./scripts/deploy.sh
-    ```
-
-3. **Build and Upload the Docker Image**:
-    ```sh
-    ./scripts/build-and-upload-image.sh
-    ```
-
-
-
+You may authenticate with admin:admin(to be permitted) or user:user(to be denied).

@@ -26,6 +26,7 @@ public class SecurityConfiguration {
     http.csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection
         .sessionManagement(
             session -> session.sessionCreationPolicy(STATELESS)) // Disable session management
+        .authorizeHttpRequests(auth -> auth.requestMatchers("/actuator/prometheus").permitAll())
         .authorizeHttpRequests(auth -> auth.requestMatchers("/", "/swagger-ui.html").permitAll())
         .authorizeHttpRequests(auth -> auth.requestMatchers("/bo/**").hasRole(ADMIN))
         .authorizeHttpRequests(auth -> auth.requestMatchers("/**").authenticated())

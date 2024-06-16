@@ -26,3 +26,15 @@ output "encoded_dockerconfigjson" {
     }
   }))
 }
+
+resource "kubernetes_secret" "postgresql" {
+  metadata {
+    name      = "postgresql-secret"
+    namespace = kubernetes_namespace.application_namespace.metadata[0].name
+  }
+
+  data = {
+    postgres-user     = "postgres"
+    postgres-password = "postgres"
+  }
+}

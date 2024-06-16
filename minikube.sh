@@ -45,8 +45,7 @@ is_minikube_running() {
     if [ -z "$current_context" ]; then
         return 1
     elif echo "$current_context" | grep -q "minikube"; then
-        minikube_status=$(minikube status --format='{{.Host}}' 2>/dev/null)
-        if [ "$minikube_status" = "Running" ]; then
+        if kubectl get nodes &>/dev/null; then
             return 0
         else
             return 1
@@ -125,5 +124,6 @@ terraform apply -auto-approve -var "github_username=$GITHUB_USERNAME" -var "gith
 kubectl port-forward -n paf svc/interview-exercise-service 8080:8080 &
 kubectl port-forward -n monitoring svc/kube-prometheus-stack-grafana 80:80 &
 kubectl port-forward -n monitoring svc/kube-prometheus-stack-prometheus 9090:9090 &
+kubectl port-forward -n paf svc/postgresql 5432:5432 &
 
 echo "Grafana password: $(kubectl get secret --namespace monitoring kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)"
