@@ -27,7 +27,7 @@ Ensure you have the following tools installed on your system:
 ### Quick Start
 1. To quickly deploy the application, run the following command:
  ```sh
- ./scripts/minikube.sh
+ ./minikube.sh
  ```
 
 2. Application is served here:
