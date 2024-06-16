@@ -10,6 +10,11 @@ This repository showcases a solution to upgrade the original application, bringi
 - **Security**: Role-based access control implemented.
 - **Modern Technologies**: Built with Spring Boot 3 and Java 21.
 
+## Areas not included
+- Integration with a production-grade DBMS such as PostgreSQL.
+- Advanced authentication mechanisms like Single Sign-On (SSO) or OAuth2.
+- New backoffice UI
+
 ## Prerequisites
 Ensure you have the following tools installed on your system:
 
