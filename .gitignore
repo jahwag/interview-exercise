@@ -38,3 +38,6 @@ build/
 # Terraform
 .terraform*
 terraform.tfstate*
+
+# Formatter
+pom.xml.bak

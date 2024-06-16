@@ -1,4 +1,6 @@
 # Interview Exercise
+![CI](https://github.com/jahwag/interview-exercise/actions/workflows/ci.yml/badge.svg)
+
 This repository showcases a solution to upgrade the original application, bringing it closer to production-ready standards.
 
 ## Features
