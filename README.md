@@ -1,5 +1,5 @@
 # Interview Exercise
-![CI](https://github.com/jahwag/interview-exercise/actions/workflows/ci.yml/badge.svg)
+[![Docker](https://github.com/jahwag/interview-exercise/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/jahwag/interview-exercise/actions/workflows/docker-publish.yml)
 
 This repository showcases a solution to upgrade the original application, bringing it closer to production-ready standards.
 
